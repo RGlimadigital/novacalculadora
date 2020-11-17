@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Calculadora</title>
+</head>
+
+<body onkeypress="manipularTeclado()">
+    <div class="container">
+        <table>
+            <tr>
+                <td colspan="6">
+                    <input type="text" id="display" value="0" disabled>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" onclick="atualizarDisplay(this)" value="7">
+                </td>
+                <td>
+                    <input type="button" onclick="atualizarDisplay(this)" value="8">
+                </td>
+                <td>
+                    <input type="button" onclick="atualizarDisplay(this)" value="9">
+                </td>
+                <td>
+                    <input type="button" onclick="atualiarOpeacao(this)" value="*">
+                </td>
+            <tr>
+                <td>
+                    <input type="button" onclick="atualizarDisplay(this)" value="4">
+                </td>
+                <td>
+                    <input type="button" onclick="atualizarDisplay(this)" value="5">
+                </td>
+                <td>
+                    <input type="button" onclick="atualizarDisplay(this)" value="6">
+                </td>
+                <td>
+                    <input type="button" onclick="atualiarOpeacao(this)" value="-">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" onclick="atualizarDisplay(this)" value="1">
+                </td>
+                <td>
+                    <input type="button" onclick="atualizarDisplay(this)" value="2">
+                </td>
+                <td>
+                    <input type="button" onclick="atualizarDisplay(this)" value="3">
+                </td>
+                <td>
+                    <input type="button" onclick="atualiarOpeacao(this)" value="+">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" onclick="limparDisplay()" value="C">
+                </td>
+                <td>
+                    <input type="button" value="O">
+                </td>
+                <td>
+                    <input type="button" onclick="calcularOperacao()" value="=">
+                </td>
+                <td>
+                    <input type="button" onclick="atualiarOpeacao(this)" value="/">
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+
+    <script>
+        var display = document.getElementById('display')
+        var operador = ""
+        var valor1 = 0
+
+        function atualizarDisplay(btn) {
+
+            if (display.value.length === 9) return
+
+            if (display.value === '0') display.value = btn.value
+            else display.value += btn.value
+        }
+
+        function limparDisplay() {
+            display.value = 0;
+        }
+
+        function atualiarOpeacao(btn) {
+            operador = btn.value
+            valor1 = parseInt(display.value)
+            display.value = '0'
+        }
+
+        function calcularOperacao() {
+            const valor2 = parseInt(display.value)
+
+            valor1 = eval(valor1 + operador + valor2)
+            display.value = valor1
+            operador = ""
+        }
+
+        function manipularTeclado() {
+            if (/[0-9]/.test(event.key))
+                atualizarDisplay({ value: event.key })
+        }
+
+
+    </script>
+</body>
+
+</html>
